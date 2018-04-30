@@ -1,0 +1,93 @@
+@font-face {
+  font-family: navigation;
+  src: url(https://http2.mlstatic.com/ui/navigation/3.2.1/navigation.eot);
+  src: url(https://http2.mlstatic.com/ui/navigation/3.2.1/navigation.eot#iefix) format("embedded-opentype"),url(https://http2.mlstatic.com/ui/navigation/3.2.1/navigation.woff2) format("woff2"),url(https://http2.mlstatic.com/ui/navigation/3.2.1/navigation.woff) format("woff"),url(https://http2.mlstatic.com/ui/navigation/3.2.1/navigation.ttf) format("truetype"),url(https://http2.mlstatic.com/ui/navigation/3.2.1/navigation.svg#navigation) format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+[class*=' nav-icon-']:before,
+[class^=nav-icon-]:before {
+  display: inline-block;
+  font-variant: normal;
+  font-family: navigation;
+  margin: 0;
+  speak: none;
+  text-align: center;
+  text-rendering: auto;
+  width: 1em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nav-icon-search:before {
+  content: '\EA27';
+}
+
+.nav-header {
+  background-color: #fff159;
+  display: flex;
+  justify-content: center;
+
+  .nav-bounds {
+    align-items: center;
+    display: flex;
+    height: 56px;
+    max-width: 1200px;
+  }
+
+  .nav-logo {
+    background-image: url('/static/logo.png');
+    background-repeat: no-repeat;
+    height: 34px;
+    margin-right: 16px;
+    width: 134px;
+  }
+
+  .nav-search {
+    background-color: #fff;
+    border: 0 rgba(0,0,0,.2);
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: flex;
+    height: 39px;
+    width: 622px;
+    padding: 7px 5px 9px 15px;
+
+    .nav-icon-search {
+      color: #666;
+      font-size: 16px;
+      font-style: normal;
+
+      span {
+        display: none;
+      }
+    }
+
+    .nav-search-btn {
+      background: none;
+      border: none;
+      border-left: 1px solid #e6e6e6;
+      color: #666;
+      cursor: pointer;
+      height: 26px;
+      outline: none;
+      width: 46px;
+    }
+
+    .nav-search-input {
+      background-color: #fff;
+      border: none;
+      box-sizing: border-box;
+      flex: 1;
+      font-size: 16px;
+      height: 100%;
+      outline: none;
+
+      &::placeholder {
+        color: #bbb;
+        font-weight: 200
+      }
+    }
+  }
+}
