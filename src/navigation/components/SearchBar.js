@@ -21,7 +21,9 @@ class SearchBar extends Component {
     return (
       <header className="nav-header" role="banner">
         <div className="nav-bounds">
-          <a className="nav-logo" href="/" tabIndex="1"></a>
+          <a className="nav-logo" href="/" tabIndex="1">
+            <img srcSet="/static/Logo_ML.png 1x, /static/Logo_ML@2x.png 2x" />
+          </a>
 
           <form className="nav-search" role="search" onSubmit={this.onSearch}>
             <input

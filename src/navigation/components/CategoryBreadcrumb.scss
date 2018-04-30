@@ -1,0 +1,18 @@
+.breadcrumb-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.breadcrumb-text {
+  color: #999;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 16px 0 0;
+  width: 876px;
+
+  .breadcrumb-separator {
+    font-size: 10px;
+    padding: 0 8px;
+  }
+}

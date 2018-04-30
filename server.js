@@ -22,7 +22,7 @@ app.prepare()
     );
 
     server.get('/items/:id', (req, res) =>
-      app.render(req, res, '/posts', { id: req.params.id })
+      app.render(req, res, '/product', { id: req.params.id })
     );
 
     server.get('/api/items', async (req, res) => {
@@ -33,12 +33,12 @@ app.prepare()
         response = await axios.get('https://api.mercadolibre.com/sites/MLA/search', {
           params: {
             q: query,
-            limit: 4
+            limit: 4,
           }
         });
       }
       catch(e) {
-        return res.send(e.message, 500);
+        return res.status(500).send(e.message);
       }
 
       const { data: { filters, results }} = response;
@@ -50,13 +50,13 @@ app.prepare()
           condition: result.condition,
           id: result.id,
           free_shipping: result.shipping.free_shipping,
-          picture: result.thumbnail,
+          picture: result.secure_thumbnail,
           price: {
             amount: priceAmount,
             currency: result.currency_id,
-            decimals: priceDecimals
+            decimals: priceDecimals,
           },
-          title: result.title
+          title: result.title,
         };
       });
 
@@ -70,10 +70,49 @@ app.prepare()
       res.json({
         author: {
           name: 'Fernando',
-          lastname: 'Carril'
+          lastname: 'Carril',
         },
         categories,
-        items
+        items,
+      });
+    });
+
+    server.get('/api/items/:id', async (req, res) => {
+      let descriptionResponse;
+      let itemResponse;
+      try {
+        [descriptionResponse, itemResponse] = await Promise.all([
+          axios.get(`https://api.mercadolibre.com/items/${req.params.id}/description`),
+          axios.get(`https://api.mercadolibre.com/items/${req.params.id}`),
+        ]);
+      }
+      catch(e) {
+        console.log(e);
+        return res.status(500).send(e.message);
+      }
+
+      const { data } = itemResponse;
+      const [priceAmount, priceDecimals] = data.price.toString().split('.').map(n => parseInt(n, 10));
+
+      res.json({
+        author: {
+          name: 'Fernando',
+          lastname: 'Carril'
+        },
+        item: {
+          condition: data.condition,
+          description: descriptionResponse.data.plain_text,
+          free_shipping: data.shipping.free_shipping,
+          id: data.id,
+          picture: data.secure_thumbnail,
+          price: {
+           amount: priceAmount,
+           currency: data.currency_id,
+           decimals: priceDecimals,
+          },
+          sold_quantity: data.sold_quantity,
+          title: data.title,
+        },
       });
     });
 
