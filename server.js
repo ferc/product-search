@@ -28,32 +28,38 @@ app.prepare()
     server.get('/api/items', async (req, res) => {
       const query = req.query.q || '';
 
-      let response;
+      let currenciesResponse;
+      let searchResponse;
+
       try {
-        response = await axios.get('https://api.mercadolibre.com/sites/MLA/search', {
-          params: {
-            q: query,
-            limit: 4,
-          }
-        });
+        [currenciesResponse, searchResponse] = await Promise.all([
+          axios.get('https://api.mercadolibre.com/currencies'),
+          axios.get('https://api.mercadolibre.com/sites/MLA/search', {
+            params: {
+              q: query,
+              limit: 4,
+            }
+          }),
+        ]);
       }
       catch(e) {
         return res.status(500).send(e.message);
       }
 
-      const { data: { filters, results }} = response;
+      const { data: { filters, results }} = searchResponse;
 
       const items = results.map(result => {
         const [priceAmount, priceDecimals] = result.price.toString().split('.').map(n => parseInt(n, 10));
+        const currency = currenciesResponse.data.find(currency => currency.id === result.currency_id);
 
         return {
           condition: result.condition,
           id: result.id,
           free_shipping: result.shipping.free_shipping,
-          picture: result.secure_thumbnail,
+          picture: result.thumbnail,
           price: {
             amount: priceAmount,
-            currency: result.currency_id,
+            currency: currency.symbol,
             decimals: priceDecimals,
           },
           title: result.title,
@@ -78,36 +84,44 @@ app.prepare()
     });
 
     server.get('/api/items/:id', async (req, res) => {
+      let currenciesResponse;
+      let categoriesResponse;
       let descriptionResponse;
       let itemResponse;
+
       try {
-        [descriptionResponse, itemResponse] = await Promise.all([
+        [currenciesResponse, descriptionResponse, itemResponse] = await Promise.all([
+          axios.get('https://api.mercadolibre.com/currencies'),
           axios.get(`https://api.mercadolibre.com/items/${req.params.id}/description`),
           axios.get(`https://api.mercadolibre.com/items/${req.params.id}`),
         ]);
+
+        categoriesResponse = await axios.get(`https://api.mercadolibre.com/categories/${itemResponse.data.category_id}`);
       }
       catch(e) {
-        console.log(e);
         return res.status(500).send(e.message);
       }
 
       const { data } = itemResponse;
       const [priceAmount, priceDecimals] = data.price.toString().split('.').map(n => parseInt(n, 10));
+      const categories = categoriesResponse.data.path_from_root.map(path => path.name);
+      const currency = currenciesResponse.data.find(currency => currency.id === data.currency_id);
 
       res.json({
         author: {
           name: 'Fernando',
           lastname: 'Carril'
         },
+        categories,
         item: {
           condition: data.condition,
           description: descriptionResponse.data.plain_text,
           free_shipping: data.shipping.free_shipping,
           id: data.id,
-          picture: data.secure_thumbnail,
+          picture: data.thumbnail,
           price: {
            amount: priceAmount,
-           currency: data.currency_id,
+           currency: currency.symbol,
            decimals: priceDecimals,
           },
           sold_quantity: data.sold_quantity,

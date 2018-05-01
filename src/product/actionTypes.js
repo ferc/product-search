@@ -1,0 +1,3 @@
+export const FETCH_PRODUCT = 'product/FETCH_PRODUCT';
+export const FETCH_PRODUCT_ERROR = 'product/FETCH_PRODUCT_ERROR';
+export const FETCH_PRODUCT_SUCCESS = 'product/FETCH_PRODUCT_SUCCESS';

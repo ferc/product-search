@@ -27,7 +27,7 @@ export default (...args) => (Component) => {
     const { store, initialProps, initialState } = props;
 
     // Connect page to redux with connect arguments
-    const ConnectedComponent = connect.apply(null, connectArgs)(Component);
+    const ConnectedComponent = connect(...connectArgs)(Component);
 
     // Wrap with redux Provider with store
     // Create connected page with initialProps

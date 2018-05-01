@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import productSearch from '../../product-search';
 
 import './SearchBar.scss';
 
@@ -7,14 +9,18 @@ class SearchBar extends Component {
     super(props);
 
     this.state = {
-      query: ''
+      query: props.query || ''
     };
   }
 
-  onQueryChange = query => this.setState({ query });
+  onQueryChange = event => {
+    this.setState({ query: event.target.value });
+  }
 
   onSearch = event => {
     event.preventDefault();
+
+    this.props.fetchProducts(this.state.query);
   }
 
   render() {
@@ -51,4 +57,8 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+const mapDispatchToProps = dispatch => ({
+  fetchProducts: (query) => dispatch(productSearch.actions.fetchProducts(query)),
+});
+
+export default connect(null, mapDispatchToProps)(SearchBar);

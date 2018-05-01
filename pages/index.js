@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { SearchBar } from '../src/navigation';
+import { initStore } from '../src/store';
+import withRedux from '../utils/withRedux';
+
+import './layout.scss';
 
 class ProductSearchPage extends Component {
   render() {
@@ -9,4 +13,4 @@ class ProductSearchPage extends Component {
   }
 }
 
-export default ProductSearchPage;
+export default withRedux(initStore)(ProductSearchPage);

@@ -1,15 +1,4 @@
-import Document, { Head, Main, NextScript } from 'next/document'
-import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from '../src/rootReducer';
-
-import './_document.scss';
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk),
-);
+import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class ProductSearchDocument extends Document {
   render () {
@@ -26,9 +15,7 @@ export default class ProductSearchDocument extends Document {
           />
         </Head>
         <body>
-          <Provider store={store}>
-            <Main />
-          </Provider>
+          <Main />
 
           <NextScript />
         </body>
