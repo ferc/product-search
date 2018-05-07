@@ -2,9 +2,8 @@
   "name": "product-search",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "@zeit/next-sass": "^0.1.2",

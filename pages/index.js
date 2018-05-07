@@ -19,6 +19,7 @@ class ProductSearchPage extends Component {
           <meta property="og:url" content="https://www.mercadolibre.com.ar/" />
           <meta property="og:image" content="https://http2.mlstatic.com/static/org-img/homesnw/mercado-libre.png?v=2" />
         </Head>
+
         <SearchBar />
       </div>
     );

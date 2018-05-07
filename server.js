@@ -6,8 +6,7 @@ const withSass = require('@zeit/next-sass');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const conf = withSass();
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ conf, dev });
+const app = next({ conf, dev: true });
 const handle = app.getRequestHandler();
 
 app.prepare()
