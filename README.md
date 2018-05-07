@@ -1,4 +1,14 @@
-# Product Search
+# Fernando Carril
+
+### Datos personales
+
+**Nombre:** Fernando Carril
+
+**Email:** facarril@gmail.com
+
+**LinkedIn:** [https://www.linkedin.com/in/fcarril/](https://www.linkedin.com/in/fcarril/)
+
+## Aplicación
 
 Aplicación web para búsqueda de publicaciones de Mercado Libre Argentina, con un servidor Express la cual contiene la API para mostrar la información en la página.
 
@@ -27,6 +37,13 @@ Utilización de React y Redux sin otras librerías que contribuyan al peso del s
 Uso de Redux y Redux Thunk para una mayor escabilidad del sitio. 
 
 Componentes modularizados y reutilizables.
+
+### Ejecución
+
+Ante todo se debe tener previamente instalado Node.js (versión 8.x LTS en adelante)
+
+1. Se deben de instalar las dependencias del proyecto: `npm install`
+2. Por último, iniciar el servidor: `npm start`
 
 ## Mejoras pendientes no incluídas en el alcance
 
