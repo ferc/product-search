@@ -23,8 +23,12 @@ class Product extends Component {
       <div className="product-container">
         <div className="product">
           <section className="product-information">
-            <div class="product-image-container">
-              <img className="product-image" src={product.picture} />
+            <div className="product-image-container">
+              <img
+                alt={product.title}
+                className="product-image"
+                src={product.picture}
+              />
             </div>
 
             <div className="product-description">

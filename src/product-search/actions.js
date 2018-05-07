@@ -3,7 +3,7 @@ import fetch from 'isomorphic-unfetch';
 
 export const fetchProducts = (query = '') => async (dispatch, getState) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/items?q=${encodeURI(query)}`);
+    const response = await fetch(`${process.env.API_ENDPOINT}/items?q=${encodeURI(query)}`);
     const products = await response.json();
 
     dispatch(fetchProductsSuccess(products, query));

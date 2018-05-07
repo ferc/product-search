@@ -68,8 +68,9 @@
 }
 
 .product-status {
-  font-size: 14px;
   color: #666;
+  font-size: 14px;
+  margin: 0 8px;
 }
 
 .product-title {
@@ -77,4 +78,33 @@
   font-weight: 600;
   line-height: 27px;
   margin: 8px 0;
+}
+
+@media (max-width: 767px) {
+  .checkout-button {
+    padding: 4px 6px;
+    height: 40px;
+    width: 100px;
+  }
+
+  .product-information {
+    .product-image-container .product-image {
+      height: 250px;
+      width: 250px;
+    }
+  }
+
+  .product-title {
+    font-size: 16px;
+    line-height: 17px;
+  }
+}
+
+@media (max-width: 468px) {
+  .product-information {
+    .product-image-container .product-image {
+      height: 200px;
+      width: 200px;
+    }
+  }
 }

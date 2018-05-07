@@ -22,14 +22,13 @@ class ProductPreview extends Component {
 
     return (
       <li className="results-item">
-        <div className="item-image">
+        <div className="item-image-container">
           <Link href={`/items/${product.id}`}>
             <a className="item-image-link">
               <img
                 alt={product.title}
-                height="160"
+                className="item-image"
                 src={product.picture}
-                width="160"
               />
             </a>
           </Link>
@@ -45,15 +44,16 @@ class ProductPreview extends Component {
               </div>
 
               {product.free_shipping && <div className="item-shipping-free">
-                <img srcSet="/static/ic_shipping.png 1x, /static/ic_shipping@2x.png 2x" />
+                <img
+                  alt="Free Shipping"
+                  srcSet="/static/ic_shipping.png 1x, /static/ic_shipping@2x.png 2x"
+                />
               </div>}
             </div>
 
             <h2 className="item-title">
               <Link href={`/items/${product.id}`}>
-                <a className="item-title-link">
-                  <span className="item-title-text">{product.title}</span>
-                </a>
+                <a className="item-title-link">{product.title}</a>
               </Link>
             </h2>
           </div>

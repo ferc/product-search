@@ -4,11 +4,16 @@
   padding: 8px 16px;
 }
 
-.item-image {
+.item-image-container {
   align-items: center;
   display: flex;
   height: 100%;
   margin-right: 32px;
+
+  .item-image {
+    height: 160px;
+    width: 160px;
+  }
 
   .item-image-link {
     height: 160px;
@@ -25,14 +30,12 @@
 
     .item-title-link {
       color: #333;
-      text-decoration: none;
-    }
-
-    .item-title-text {
+      display: block;
       font-size: 20px;
       font-stretch: 100%;
       font-weight: 300;
       overflow: hidden;
+      text-decoration: none;
       text-overflow: ellipsis;
     }
   }
@@ -60,9 +63,12 @@
 }
 
 .item-shipping-free {
-  height: 18px;
   margin-left: 10px;
-  width: 18px;
+
+  img {
+    height: 18px;
+    width: 18px;
+  }
 }
 
 .results-item {
@@ -70,4 +76,20 @@
   display: flex;
   min-height: 208px;
   padding: 24px;
+}
+
+@media (max-width: 767px) {
+  .item-image-container .item-image {
+    height: 115px;
+    width: 115px;
+  }
+
+  .item-information .item-title .item-title-link {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .results-item {
+    padding: 8px;
+  }
 }

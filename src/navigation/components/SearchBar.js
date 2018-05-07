@@ -20,6 +20,11 @@ class SearchBar extends Component {
   onSearch = event => {
     event.preventDefault();
 
+    if (typeof window !== 'undefined') {
+      window.location.href = `/items?search=${this.state.query}`;
+      return;
+    }
+
     this.props.fetchProducts(this.state.query);
   }
 
@@ -28,7 +33,10 @@ class SearchBar extends Component {
       <header className="nav-header" role="banner">
         <div className="nav-bounds">
           <a className="nav-logo" href="/" tabIndex="1">
-            <img srcSet="/static/Logo_ML.png 1x, /static/Logo_ML@2x.png 2x" />
+            <img
+              alt="logo"
+              srcSet="/static/Logo_ML.png 1x, /static/Logo_ML@2x.png 2x"
+            />
           </a>
 
           <form className="nav-search" role="search" onSubmit={this.onSearch}>
@@ -48,7 +56,10 @@ class SearchBar extends Component {
             />
 
             <button type="submit" className="nav-search-btn">
-              <i className="nav-icon-search"><span>Buscar</span></i>
+              <img
+                alt="logo"
+                srcSet="/static/ic_Search.png 1x, /static/ic_Search@2x.png 2x"
+              />
             </button>
           </form>
         </div>
