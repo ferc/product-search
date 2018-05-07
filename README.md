@@ -51,3 +51,4 @@ Ante todo se debe tener previamente instalado Node.js (versión 8.x LTS en adela
 * Test de integración
 * Utilización de linter
 * i18n con react-intl
+* Páginas de errores (404 / 500)

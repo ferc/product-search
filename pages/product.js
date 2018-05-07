@@ -8,8 +8,22 @@ import withRedux from '../utils/withRedux';
 import './layout.scss';
 
 class ProductPage extends Component {
-  static async getInitialProps({ query, store }) {
+  static async getInitialProps({ query, res, store }) {
     await store.dispatch(product.actions.fetchProduct(query.id));
+
+    const state = store.getState();
+
+    if (!state[product.constants.NAME].product) {
+      if (res) {
+        res.writeHead(302, {
+          Location: '/',
+        });
+        res.end();
+      }
+      else {
+        window.location.href = '/';
+      }
+    }
   }
 
   render() {
